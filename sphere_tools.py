@@ -69,9 +69,9 @@ def rtp2xyz(r, theta, phi):
     return xout
 
 
-def create_tree_for_spherical_data(inputLats, inputLons, inputVals, n=16):
+def create_tree_for_spherical_data(inputLons, inputLats, inputVals, n=16):
 
-    ithetas = np.radians(90-inputLats)
+    ithetas = np.radians(90.-inputLats)
     iphis   = np.radians(inputLons)
     irs     = np.ones(np.shape(ithetas))
     nodes = []
@@ -82,17 +82,17 @@ def create_tree_for_spherical_data(inputLats, inputLons, inputVals, n=16):
     return tree
 
 
-def sampleOnSphere(inputLats, inputLons, inputVals, othetas, ophis, tree=None, n=16, k=1, distance_upper_bound=np.inf):
+def sampleOnSphere(inputLons, inputLats, inputVals, sample_points_lons, sample_points_lats, tree=None, n=16, k=1, distance_upper_bound=np.inf):
 
     # if distance_upper_bound specified, assume that it is specified in degrees, convert to radians
     if not np.isnan(distance_upper_bound):
         distance_upper_bound = np.radians(distance_upper_bound)
 
     if (tree is None):
-        tree = create_tree_for_spherical_data(inputLats, inputLons, inputVals)
+        tree = create_tree_for_spherical_data(inputLons, inputLats, inputVals)
     
-    othetas = np.radians(90-othetas)
-    ophis   = np.radians(ophis)
+    othetas = np.radians(90.-sample_points_lats)
+    ophis   = np.radians(sample_points_lons)
     oxyzs=rtp2xyz(np.ones(np.shape(othetas)), othetas, ophis)
 
     d,l = tree.query(oxyzs, k=k, distance_upper_bound=distance_upper_bound)
