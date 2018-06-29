@@ -2,7 +2,7 @@ import numpy as np
 import pygplates
 from scipy import spatial
 import healpy as hp
-from netCDF4 import Dataset
+#from netCDF4 import Dataset
 
 
 def marsaglias_method(N):

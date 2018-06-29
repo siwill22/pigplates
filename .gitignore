@@ -2,3 +2,6 @@
 .ipynb_checkpoints/create_gpml-checkpoint.py
 .ipynb_checkpoints/kinematic_tools-checkpoint.py
 .ipynb_checkpoints/sphere_tools-checkpoint.py
+create_gpml.pyc
+sphere_tools.pyc
+__init__.pyc
